@@ -1,8 +1,9 @@
-import './styles/game.css';
-import Game from './partials/Game'
+import "./styles/game.css";
+import Game from "./partials/Game";
 
 // create a game instance
-const game = new Game('game', 512, 256);
+const gameElement = document.getElementById("game");
+const game = new Game(gameElement, gameElement.clientWidth, gameElement.clientHeight);
 
 (function gameLoop() {
     game.render();

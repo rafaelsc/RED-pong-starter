@@ -1,10 +1,13 @@
+import {SVG_NS} from "../settings"
+import "./models";
+
 export default class Game {
 
 	constructor(element, width, height) {
 		this.element = element;
 		this.width = width;
 		this.height = height;
-	
+
 		// Other code goes here...
 	}
 
