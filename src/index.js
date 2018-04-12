@@ -2,7 +2,7 @@
 
 import "./styles/game.css";
 // import Game from "./partials/Game";
-import * as SVG from "svg.js"
+import SVG from "svg.js"
 
 document.addEventListener("DOMContentLoaded", function() {
     // code...
