@@ -7,14 +7,13 @@
 	<body>
 		<div class="game-wrapper">
 			<h1>Pong</h1>
-			<div id="game">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="512" height="256" viewbox="0 0 512 256">
+			<div id="game" class="game-board">
+                <svg id="game-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="512" height="256" viewbox="0 0 512 256">
                     <line x1="256" x2="256" y1="0" y2="256" stroke-dasharray="5, 10" />
 
-                    <rect id="ball" x="252" y="124" width="8" height="8" />
-
-                    <rect id="p1Paddle" x="32" y="100" width="8" height="56" />
-                    <rect id="p2Paddle" x="472" y="100" width="8" height="56" />
+                    <rect id="ball"     x="252" y="124" width="8" height="8" />
+                    <rect id="p1Paddle" x="10"  y="100" width="8" height="56" />
+                    <rect id="p2Paddle" x="494" y="100" width="8" height="56" />
                 </svg>
             </div>
         </div>

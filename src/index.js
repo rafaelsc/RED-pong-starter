@@ -1,32 +1,27 @@
-"use strict";
-
 import "./styles/game.css";
-// import Game from "./partials/Game";
-import SVG from "svg.js"
+import { KEYS } from "./settings.js";
+import Game from "./partials/Game";
 
-document.addEventListener("DOMContentLoaded", function() {
-    // code...
+const game = new Game();
+game.reset();
 
-    const svg = SVG("game").size(300, 300);
-    var rect = svg.rect(100, 100).attr({ fill: '#f06' });
+document.addEventListener("keydown", event => {
+    console.log(event);
 
+    switch (event.code) {
+        case KEYS.a:    game.player1.moveUp();   break;
+        case KEYS.z:    game.player1.moveDown(); break;
+        case KEYS.up:   game.player2.moveUp();   break;
+        case KEYS.down: game.player2.moveDown(); break;
+      }
+
+    game.render();
 });
 
 
+//TODO, Only Start the render Render after start the game
 
-
-// other work here...
-
-//let draw = svg("game-board-svg");
-
-
-
-
-// // create a game instance
-// const gameElement = document.getElementById("game");
-// const game = new Game(gameElement, gameElement.clientWidth, gameElement.clientHeight);
-
-// (function gameLoop() {
-//     game.render();
-//     requestAnimationFrame(gameLoop);
-// })();
+(function gameLoop() {
+    game.render();
+    //requestAnimationFrame(gameLoop);
+})();
