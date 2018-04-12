@@ -1,7 +1,7 @@
 export const KEYS = {
-    a: "KeyA",        // player 1 up key
-    z: "KeyZ",        // player 1 down key
-    up: "ArrowUp",    // player 2 up key
-    down: "ArrowDown",// player 2 down key
-    spaceBar: "Space",
+    p1Up: "KeyA",        // player 1 up key
+    p1Down: "KeyZ",        // player 1 down key
+    p2Up: "ArrowUp",    // player 2 up key
+    p2Down: "ArrowDown",// player 2 down key
+    gameStart: "Space",
 }

@@ -95,7 +95,6 @@ export class Paddle{
         this.isDirty = true;
 
         this.y = Math.max(0, (this.y - this.speed));
-
         console.log("MoveUp From Paddle." + this.paddleSvg.id() +" to:"+ this.y);
     }
 

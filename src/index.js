@@ -1,27 +1,33 @@
 import "./styles/game.css";
 import { KEYS } from "./settings.js";
 import Game from "./partials/Game";
+import KeyPressMapCallBack from "./util/KeyPressMapCallBack.js"
+
 
 const game = new Game();
 game.reset();
 
-document.addEventListener("keydown", event => {
-    console.log(event);
 
-    switch (event.code) {
-        case KEYS.a:    game.player1.moveUp();   break;
-        case KEYS.z:    game.player1.moveDown(); break;
-        case KEYS.up:   game.player2.moveUp();   break;
-        case KEYS.down: game.player2.moveDown(); break;
-      }
+const keyMapCallBack = new KeyPressMapCallBack(new Map([
+    [ KEYS.p1Up  , () => game.player1.moveUp()   ],
+    [ KEYS.p1Down, () => game.player1.moveDown() ],
+    [ KEYS.p2Up  , () => game.player2.moveUp()   ],
+    [ KEYS.p2Down, () => game.player2.moveDown() ]
+]));
 
-    game.render();
+document.body.addEventListener("keydown", function (e) {
+    const isKeyIsMapped = keyMapCallBack.press(e.code);
+    if(isKeyIsMapped){
+        event.preventDefault();
+    }
 });
-
+document.body.addEventListener("keyup", function (e) {
+    keyMapCallBack.release(e.code);
+});
 
 //TODO, Only Start the render Render after start the game
 
 (function gameLoop() {
     game.render();
-    //requestAnimationFrame(gameLoop);
+    requestAnimationFrame(gameLoop);
 })();

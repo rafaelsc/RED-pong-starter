@@ -16,6 +16,7 @@
     "quotes": [ 1, "double" ]
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   }
 }
