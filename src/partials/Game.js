@@ -12,16 +12,34 @@ export default class Game {
         this.board = new Model.Board(boardSvg, p1Paddle, p2Paddle, ball);
 	}
 
-    get player1() {
-        return this.board.player1;
+    player1MoveUp() {
+        if(this.isPaused){
+            return;
+        }
+        return this.board.player1.moveUp();
     }
-    get player2() {
-        return this.board.player2
+    player1MoveDown() {
+        if(this.isPaused){
+            return;
+        }
+        return this.board.player1.moveDown();
+    }
+    player2MoveUp() {
+        if(this.isPaused){
+            return;
+        }
+        return this.board.player2.moveUp();
+    }
+    player2MoveDown() {
+        if(this.isPaused){
+            return;
+        }
+        return this.board.player2.moveDown();
     }
 
-    get scoreBoard() {
-        return this.board.player2
-    }
+    // get scores() {
+    //     return this.board.scoreBoard.scores;
+    // }
 
     reset() {
         this.board.reset()

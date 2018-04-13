@@ -9,10 +9,10 @@ game.reset();
 
 
 const keyMapCallBack = new KeyPressMapCallBack(new Map([
-    [ KEYS.p1Up  , () => game.player1.moveUp()   ],
-    [ KEYS.p1Down, () => game.player1.moveDown() ],
-    [ KEYS.p2Up  , () => game.player2.moveUp()   ],
-    [ KEYS.p2Down, () => game.player2.moveDown() ],
+    [ KEYS.p1Up  , () => game.player1MoveUp()   ],
+    [ KEYS.p1Down, () => game.player1MoveDown() ],
+    [ KEYS.p2Up  , () => game.player2MoveUp()   ],
+    [ KEYS.p2Down, () => game.player2MoveDown() ],
     [ KEYS.gameStart, () => game.startOrPause()  ]
 ]));
 
