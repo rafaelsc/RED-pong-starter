@@ -4,7 +4,7 @@ export class Board{
 
         this.width = boardSvg.width();
         this.height = boardSvg.height();
-        this.boardBox = this.boardSvg.bbox();
+        this.boardBox = this.boardSvg.rbox();
 
         this.score = new ScoreBoard();
 
@@ -37,9 +37,6 @@ export class Board{
     update() {
         const paddle1Box = this.paddle1.bbox();
         const paddle2Box = this.paddle1.bbox();
-        // const ballBox = this.ball.bbox();
-
-        // console.log(this.boardBox, ballBox, ballBox.merge(boardBox));
 
         this.ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
     }
@@ -123,9 +120,9 @@ export class Ball{
         const ballBox = this.bbox();
 
 		const hitLeft = ballBox.x <= 0;
-		const hitRight = ballBox.x >= boardBox.width;
+		const hitRight = ballBox.x2 >= boardBox.width;
 		const hitTop = ballBox.y <= 0;
-		const hitBottom = ballBox.y >= boardBox.height;
+		const hitBottom = ballBox.y2 >= boardBox.height;
 
 		if (hitLeft || hitRight) {
             this.vx *= -1;
