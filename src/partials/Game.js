@@ -25,12 +25,23 @@ export default class Game {
 
     reset() {
         this.board.reset()
-        this.render();
+        this.isStarted = false;
+        this.isPaused = true;
     }
 
-	render() {
-        // console.log("Render");
+    startOrPause() {
+        if(!this.isStarted){
+            this.reset();
+            this.board.start();
+        }
+        this.isPaused = !this.isPaused;
+        this.isStarted = true;
+    }
+
+	gameloop() {
+        if(!this.isPaused && this.isStarted){
+            this.board.update();
+        }
         this.board.render();
 	}
-
 }

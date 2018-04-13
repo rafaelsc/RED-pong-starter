@@ -12,7 +12,8 @@ const keyMapCallBack = new KeyPressMapCallBack(new Map([
     [ KEYS.p1Up  , () => game.player1.moveUp()   ],
     [ KEYS.p1Down, () => game.player1.moveDown() ],
     [ KEYS.p2Up  , () => game.player2.moveUp()   ],
-    [ KEYS.p2Down, () => game.player2.moveDown() ]
+    [ KEYS.p2Down, () => game.player2.moveDown() ],
+    [ KEYS.gameStart, () => game.startOrPause()  ]
 ]));
 
 document.body.addEventListener("keydown", function (e) {
@@ -28,6 +29,6 @@ document.body.addEventListener("keyup", function (e) {
 //TODO, Only Start the render Render after start the game
 
 (function gameLoop() {
-    game.render();
+    game.gameloop();
     requestAnimationFrame(gameLoop);
 })();
