@@ -9,11 +9,20 @@
 			<h1>Pong</h1>
 			<div id="game" class="game-board">
                 <svg id="game-svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="512" height="256" viewbox="0 0 512 256">
-                    <line x1="256" x2="256" y1="0" y2="256" stroke-dasharray="5, 10" />
+                    <g class="fixed-board-elements">
+                        <g class="field-lines">
+                            <line x1="256" x2="256" y1="0" y2="256" stroke-dasharray="5, 10" />
+                        </g>
+                        <g class="score-board">
+                            <text id="p1Score" x="200" y="35">0</text>
+                            <text id="p2Score" x="286" y="35">0</text>
+                        </g>
+                    </g>
 
-                    <circle id="ball"  cx="256" cy="128" r="6" />
-                    <rect id="p1Paddle" x="10"   y="100" width="8" height="56" />
-                    <rect id="p2Paddle" x="494"  y="100" width="8" height="56" />
+
+                    <circle id="ball"   class="ball"  cx="256" cy="128" r="6" />
+                    <rect id="p1Paddle" class="paddle" x="10"   y="100" width="8" height="56" />
+                    <rect id="p2Paddle" class="paddle" x="494"  y="100" width="8" height="56" />
                 </svg>
             </div>
         </div>

@@ -1,13 +1,14 @@
+import { setTimeout } from "timers";
+
 export class Board{
-    constructor(boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg){
+    constructor(boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg){
         this.boardSvg = boardSvg;
 
         this.width = boardSvg.width();
         this.height = boardSvg.height();
         this.boardBox = this.boardSvg.rbox();
 
-        this.score = new ScoreBoard();
-
+        this.score = new ScoreBoard(score1Svg, score2Svg);
         this.paddle1 = new Paddle(p1PaddleSvg, this.height);
         this.paddle2 = new Paddle(p2PaddleSvg, this.height);
         this.ball = new Ball(ballSvg, this.width, this.height);
@@ -40,8 +41,14 @@ export class Board{
 
         let scoreSide = this.ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
         if(scoreSide !== 0){
-            console.log("SCORE!");
+             this.scores();
         }
+    }
+
+    scores(scoreSide){
+        this.ball.reset();
+        setTimeout(()=> this.ball.startMoving(scoreSide*-1), 1000); //TODO Colocar em Settings
+        this.score.scores(scoreSide === -1 ? 2 : 1);
     }
 
     render() {
@@ -53,7 +60,9 @@ export class Board{
 }
 
 export class ScoreBoard{
-    constructor(){
+    constructor(score1Svg, score2Svg){
+        this.score1Svg = score1Svg;
+        this.score2Svg = score2Svg;
         this.reset();
     }
 
@@ -63,10 +72,24 @@ export class ScoreBoard{
         this.player2 = 0;
     }
 
+    scores(playerThatScore){
+        this.isDirty = true;
+
+        if(playerThatScore === 1){
+            this.player1++;
+        }
+        if(playerThatScore === 2){
+            this.player2++;
+        }
+    }
+
     render() {
         if(!this.isDirty){
             return;
         }
+
+        this.score1Svg.text(this.player1.toString());
+        this.score2Svg.text(this.player2.toString());
 
         this.isDirty = false;
     }
@@ -77,8 +100,7 @@ export class Ball{
         this.ballSvg = ballSvg;
         this.cx = this.originalCX = ballSvg.cx();
         this.cy = this.originalCY = ballSvg.cy();
-        this.vx = this.vy = 0;
-        this.direction = 0;
+        this.direction = this.vx = this.vy = 0;
         this.reset();
     }
 
@@ -91,16 +113,13 @@ export class Ball{
 
         this.cx = this.originalCX;
         this.cy = this.originalCY;
-        this.vx = this.vy = 0;
-        this.direction = 0;
+        this.direction = this.vx = this.vy = 0;
     }
 
-    startMoving() {
+    startMoving(direction = null) {
         this.isDirty = true;
 
-        this.direction = (Math.random() > .5 ? 1 : -1);
-        // console.log("Direction:"+ this.direction);
-
+        this.direction = direction || (Math.random() > .5 ? 1 : -1);
         while(this.vy === 0){
             this.vy = Math.floor(Math.random() * 10 - 5);
         }
@@ -109,10 +128,9 @@ export class Ball{
 
     updatePos(boardBox, paddle1Box, paddle2Box){
         this.isDirty = true;
+
         const ballBox = this.bbox();
-
         const scoreSide = this.checkforWallCollision(ballBox, boardBox);
-
         this.checkforPaddleCollision(ballBox, paddle1Box, paddle2Box)
 
         this.cx += this.vx;
@@ -127,11 +145,10 @@ export class Ball{
 		const hitTop = ballBox.y <= 0;
 		const hitBottom = ballBox.y2 >= boardBox.height;
 
-        //TODO
-		if (hitLeft || hitRight) {
-            this.vx *= -1;
-            this.direction *= -1;
-            return hitLeft ? -1 : 1;
+		if (hitLeft) {
+            return -1;
+        } else if (hitRight) {
+            return 1;
 		} else if (hitTop || hitBottom) {
 			this.vy *= -1;
         }
@@ -143,7 +160,6 @@ export class Ball{
         const hitP1PadBySide = ballBox.x <= paddle1Box.x2 && (ballBox.y2 >= paddle1Box.y && ballBox.y <= paddle1Box.y2 )
         const hitP2PadBySide = ballBox.x2 >= paddle2Box.x && (ballBox.y2 >= paddle2Box.y && ballBox.y <= paddle2Box.y2 )
 
-        // console.log(hitP1PadBySide, hitP2PadBySide);
         if(hitP1PadBySide || hitP2PadBySide){
             this.vx *= -1;
             this.direction *= -1;

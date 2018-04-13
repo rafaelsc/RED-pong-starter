@@ -5,11 +5,13 @@ export default class Game {
 
 	constructor() {
         const boardSvg = SVG.get("game-svg");
-        const p1Paddle = SVG.get("p1Paddle");
-        const p2Paddle = SVG.get("p2Paddle");
-        const ball = SVG.get("ball");
+        const p1PaddleSvg = SVG.get("p1Paddle");
+        const p2PaddleSvg = SVG.get("p2Paddle");
+        const ballSvg = SVG.get("ball");
+        const score1Svg = SVG.get("p1Score");
+        const score2Svg = SVG.get("p2Score");
 
-        this.board = new Model.Board(boardSvg, p1Paddle, p2Paddle, ball);
+        this.board = new Model.Board(boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg);
 	}
 
     player1MoveUp() {
