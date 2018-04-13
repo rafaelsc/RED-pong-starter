@@ -36,9 +36,12 @@ export class Board{
 
     update() {
         const paddle1Box = this.paddle1.bbox();
-        const paddle2Box = this.paddle1.bbox();
+        const paddle2Box = this.paddle2.bbox();
 
-        this.ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
+        let scoreSide = this.ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
+        if(scoreSide !== 0){
+            console.log("SCORE!");
+        }
     }
 
     render() {
@@ -106,30 +109,46 @@ export class Ball{
 
     updatePos(boardBox, paddle1Box, paddle2Box){
         this.isDirty = true;
+        const ballBox = this.bbox();
 
+        const scoreSide = this.checkforWallCollision(ballBox, boardBox);
 
-
-        this.checkforWallCollision(boardBox);
-        // this.checkforPaddleCollision(paddle1Pos, paddle2Pos)
+        this.checkforPaddleCollision(ballBox, paddle1Box, paddle2Box)
 
         this.cx += this.vx;
         this.cy += this.vy;
+
+        return scoreSide;
     }
 
-    checkforWallCollision(boardBox) {
-        const ballBox = this.bbox();
-
+    checkforWallCollision(ballBox, boardBox) {
 		const hitLeft = ballBox.x <= 0;
 		const hitRight = ballBox.x2 >= boardBox.width;
 		const hitTop = ballBox.y <= 0;
 		const hitBottom = ballBox.y2 >= boardBox.height;
 
+        //TODO
 		if (hitLeft || hitRight) {
             this.vx *= -1;
             this.direction *= -1;
+            return hitLeft ? -1 : 1;
 		} else if (hitTop || hitBottom) {
 			this.vy *= -1;
-		}
+        }
+
+        return 0;
+    }
+
+    checkforPaddleCollision(ballBox, paddle1Box, paddle2Box){
+        const hitP1PadBySide = ballBox.x <= paddle1Box.x2 && (ballBox.y2 >= paddle1Box.y && ballBox.y <= paddle1Box.y2 )
+        const hitP2PadBySide = ballBox.x2 >= paddle2Box.x && (ballBox.y2 >= paddle2Box.y && ballBox.y <= paddle2Box.y2 )
+
+        // console.log(hitP1PadBySide, hitP2PadBySide);
+        if(hitP1PadBySide || hitP2PadBySide){
+            this.vx *= -1;
+            this.direction *= -1;
+            // console.log("HitPaddle!");
+        }
     }
 
     render() {
