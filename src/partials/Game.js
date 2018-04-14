@@ -1,4 +1,4 @@
-import * as Model from "./models.js";
+import * as Model from "./Board.js";
 import SVG from "svg.js";
 
 export default class Game {
