@@ -4,7 +4,9 @@ import { ScoreBoard } from "./ScoreBoard.js";
 import { Ball } from "./Ball.js";
 
 export class Board{
-    constructor(boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg){
+    constructor(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg){
+        this.gameSettings = gameSettings;
+
         this.boardSvg = boardSvg;
 
         this.width = boardSvg.width();
@@ -50,7 +52,7 @@ export class Board{
 
     scores(hitSide){
         this.ball.reset();
-        setTimeout(()=> this.ball.startMoving(hitSide*-1), 1000); //TODO Colocar em Settings
+        setTimeout(()=> this.ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreTimeInMs);
         this.score.scores(hitSide === -1 ? 2 : 1);
     }
 

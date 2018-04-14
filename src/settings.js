@@ -8,5 +8,5 @@ export const KEYS = {
 
 export const GameSettings = {
     maxScroe: 10,
-    intervalToWaitAfterScoreTimeInMs : 1000,
+    intervalToWaitAfterScoreTimeInMs : 250,
 }

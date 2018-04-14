@@ -1,12 +1,10 @@
 import "./styles/game.css";
-import { KEYS } from "./settings.js";
+import { KEYS, GameSettings} from "./settings.js";
 import Game from "./partials/Game";
 import KeyPressMapCallBack from "./util/KeyPressMapCallBack.js"
 
-
-const game = new Game();
+const game = new Game(GameSettings);
 game.reset();
-
 
 const keyMapCallBack = new KeyPressMapCallBack(new Map([
     [ KEYS.p1Up  , () => game.player1MoveUp()   ],

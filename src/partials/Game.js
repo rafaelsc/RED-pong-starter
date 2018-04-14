@@ -1,9 +1,9 @@
-import * as Model from "./Board.js";
+import { Board } from "./Board.js";
 import SVG from "svg.js";
 
 export default class Game {
 
-	constructor() {
+	constructor(gameSettings) {
         const boardSvg = SVG.get("game-svg");
         const p1PaddleSvg = SVG.get("p1Paddle");
         const p2PaddleSvg = SVG.get("p2Paddle");
@@ -11,7 +11,9 @@ export default class Game {
         const score1Svg = SVG.get("p1Score");
         const score2Svg = SVG.get("p2Score");
 
-        this.board = new Model.Board(boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg);
+        this.gameSettings = gameSettings;
+
+        this.board = new Board(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg);
 	}
 
     player1MoveUp() {
