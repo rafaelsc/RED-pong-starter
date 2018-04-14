@@ -9,7 +9,7 @@ module.exports = {
     target: "web",
 
     devtool: "source-map",
-    mode: "development",
+    // mode: "development",
 
 	entry: {
 		app: "./src/index.js",
@@ -42,7 +42,7 @@ module.exports = {
 				test: /\.js$/,
 				loader: "babel-loader",
 				query: {
-					presets: ["env"],
+                    presets: ["env"]
 				},
                 include: [src],
                 exclude: /node_modules/,

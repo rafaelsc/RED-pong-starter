@@ -26,6 +26,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "core-js": "^2.5.5",
     "svg.js": "^2.6.4"
   }
 }
