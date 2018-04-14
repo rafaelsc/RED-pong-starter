@@ -6,11 +6,15 @@ export class Ball{
         this.cy = this.originalCY = ballSvg.cy();
         this.direction = this.vx = this.vy = 0;
         this.reset();
+
+        this.pingSounds = [ new Audio("public/sounds/pong-01.wav"),
+                            new Audio("public/sounds/pong-02.wav"),
+                            new Audio("public/sounds/pong-03.wav")];
     }
 
     static createNewBallElement(boardSvg, radiosSize = 0) {
         radiosSize = radiosSize === 0 ? (3 + Math.random() * 16) : radiosSize;
-        const ballSvg = boardSvg.circle(radiosSize);
+        const ballSvg = boardSvg.circle(radiosSize).center(boardSvg.width/2, boardSvg.height/2);
         return new Ball(ballSvg);
     }
 
@@ -60,7 +64,8 @@ export class Ball{
         } else if (hitRight) {
             return 1;
 		} else if (hitTop || hitBottom) {
-			this.vy *= -1;
+            this.vy *= -1;
+            this.collisionDetected();
         }
 
         return 0;
@@ -73,8 +78,15 @@ export class Ball{
         if(hitP1PadBySide || hitP2PadBySide){
             this.vx *= -1;
             this.direction *= -1;
+            this.collisionDetected();
             // console.log("HitPaddle!");
         }
+    }
+
+    collisionDetected(){
+        const sound = this.pingSounds.shift();
+        sound.play();
+        this.pingSounds.push(sound);
     }
 
     render() {
