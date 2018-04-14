@@ -14,6 +14,8 @@ export default class Game {
         this.gameSettings = gameSettings;
 
         this.board = new Board(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg);
+
+        this.reset();
 	}
 
     player1MoveUp() {

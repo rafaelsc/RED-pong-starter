@@ -1,10 +1,10 @@
 import "./styles/game.css";
-import { KEYS, GameSettings} from "./settings.js";
-import Game from "./partials/Game";
 import KeyPressMapCallBack from "./util/KeyPressMapCallBack.js"
 
+import {KEYS, GameSettings} from "./settings.js";
+import Game from "./Pong/Game";
+
 const game = new Game(GameSettings);
-game.reset();
 
 const keyMapCallBack = new KeyPressMapCallBack(new Map([
     [ KEYS.p1Up  , () => game.player1MoveUp()   ],

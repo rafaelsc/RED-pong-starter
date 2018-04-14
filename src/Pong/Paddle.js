@@ -1,4 +1,3 @@
-
 export class Paddle{
     constructor(paddleSvg, boardHeight) {
         this.paddleSvg = paddleSvg;

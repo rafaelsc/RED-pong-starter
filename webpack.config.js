@@ -9,7 +9,7 @@ module.exports = {
     target: "web",
 
     devtool: "source-map",
-    // mode: "development",
+    mode: "development",
 
 	entry: {
 		app: "./src/index.js",
