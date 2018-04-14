@@ -44,13 +44,13 @@ export class Ball{
         this.isDirty = true;
 
         const ballBox = this.bbox();
-        const scoreSide = this.checkforWallCollision(ballBox, boardBox);
+        const hitSide = this.checkforWallCollision(ballBox, boardBox);
         this.checkforPaddleCollision(ballBox, paddle1Box, paddle2Box)
 
         this.cx += this.vx;
         this.cy += this.vy;
 
-        return scoreSide;
+        return hitSide;
     }
 
     checkforWallCollision(ballBox, boardBox) {

@@ -7,7 +7,7 @@ export class Paddle{
         this.height = paddleSvg.height();
         this.originalY = this.y = paddleSvg.y();
 
-        this.speed = 10;
+        this.speed = (56/5);
 
         this.reset();
     }

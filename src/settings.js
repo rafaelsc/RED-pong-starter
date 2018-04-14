@@ -5,3 +5,8 @@ export const KEYS = {
     p2Down: "ArrowDown",// player 2 down key
     gameStart: "Space",
 }
+
+export const GameSettings = {
+    maxScroe: 10,
+    intervalToWaitAfterScoreTimeInMs : 1000,
+}

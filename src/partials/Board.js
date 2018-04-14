@@ -42,16 +42,16 @@ export class Board{
         const paddle1Box = this.paddle1.bbox();
         const paddle2Box = this.paddle2.bbox();
 
-        let scoreSide = this.ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
-        if(scoreSide !== 0){
-             this.scores();
+        let hitSide = this.ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
+        if(hitSide !== 0){
+             this.scores(hitSide);
         }
     }
 
-    scores(scoreSide){
+    scores(hitSide){
         this.ball.reset();
-        setTimeout(()=> this.ball.startMoving(scoreSide*-1), 1000); //TODO Colocar em Settings
-        this.score.scores(scoreSide === -1 ? 2 : 1);
+        setTimeout(()=> this.ball.startMoving(hitSide*-1), 1000); //TODO Colocar em Settings
+        this.score.scores(hitSide === -1 ? 2 : 1);
     }
 
     render() {
