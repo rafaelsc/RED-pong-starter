@@ -22,30 +22,30 @@ export default class Game {
         if(this.isPaused){
             return;
         }
+        console.log("player1MoveUp");
         return this.board.player1.moveUp();
     }
     player1MoveDown() {
         if(this.isPaused){
             return;
         }
+        console.log("player2MoveDown");
         return this.board.player1.moveDown();
     }
     player2MoveUp() {
         if(this.isPaused){
             return;
         }
+        console.log("player2MoveUp");
         return this.board.player2.moveUp();
     }
     player2MoveDown() {
         if(this.isPaused){
             return;
         }
+        console.log("player2MoveDown");
         return this.board.player2.moveDown();
     }
-
-    // get scores() {
-    //     return this.board.scoreBoard.scores;
-    // }
 
     reset() {
         this.board.reset()
@@ -60,6 +60,13 @@ export default class Game {
         }
         this.isPaused = !this.isPaused;
         this.isStarted = true;
+    }
+
+    addBall() {
+        if(this.isPaused){
+            return;
+        }
+        return this.board.addBall();
     }
 
 	gameloop() {

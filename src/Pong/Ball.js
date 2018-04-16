@@ -14,8 +14,13 @@ export class Ball{
 
     static createNewBallElement(boardSvg, radiosSize = 0) {
         radiosSize = radiosSize === 0 ? (3 + Math.random() * 16) : radiosSize;
-        const ballSvg = boardSvg.circle(radiosSize).center(boardSvg.width/2, boardSvg.height/2);
+        const ballSvg = boardSvg.circle(radiosSize*2)
+                                .center(boardSvg.width()/2, boardSvg.height()/2);
         return new Ball(ballSvg);
+    }
+
+    removeBall(){
+        this.ballSvg.remove();
     }
 
     bbox() {

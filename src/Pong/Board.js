@@ -8,15 +8,14 @@ export class Board{
         this.gameSettings = gameSettings;
 
         this.boardSvg = boardSvg;
-
-        this.width = boardSvg.width();
-        this.height = boardSvg.height();
         this.boardBox = this.boardSvg.rbox();
 
         this.score = new ScoreBoard(score1Svg, score2Svg);
-        this.paddle1 = new Paddle(p1PaddleSvg, this.height);
-        this.paddle2 = new Paddle(p2PaddleSvg, this.height);
-        this.ball = new Ball(ballSvg, this.width, this.height);
+        this.paddle1 = new Paddle(p1PaddleSvg, this.boardBox.height);
+        this.paddle2 = new Paddle(p2PaddleSvg, this.boardBox.height);
+
+        this.balls = [];
+        this.reset();
     }
 
     get player1() {
@@ -29,30 +28,38 @@ export class Board{
         return this.score;
     }
 
+    addBall(radius = 0){
+        this.balls.push(Ball.createNewBallElement(this.boardSvg, radius));
+    }
+
     reset() {
         this.score.reset()
         this.paddle1.reset();
         this.paddle2.reset();
-        this.ball.reset();
+        this.balls.map(b => b.removeBall())
+        this.balls = [];
+        this.addBall(this.gameSettings.firstBallRadius);
     }
 
     start() {
-        this.ball.startMoving();
+        this.balls.map(b => b.startMoving());
     }
 
     update() {
         const paddle1Box = this.paddle1.bbox();
         const paddle2Box = this.paddle2.bbox();
 
-        let hitSide = this.ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
-        if(hitSide !== 0){
-             this.scores(hitSide);
-        }
+        this.balls.map(ball => {
+            let hitSide = ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
+            if(hitSide !== 0){
+                this.scores(ball, hitSide);
+            }
+        });
     }
 
-    scores(hitSide){
-        this.ball.reset();
-        setTimeout(()=> this.ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreTimeInMs);
+    scores(ball, hitSide){
+        ball.reset();
+        setTimeout(()=> ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreTimeInMs);
         this.score.scores(hitSide === -1 ? 2 : 1);
     }
 
@@ -60,6 +67,6 @@ export class Board{
         this.score.render()
         this.paddle1.render();
         this.paddle2.render();
-        this.ball.render();
+        this.balls.map(b => b.render());
     }
 }
