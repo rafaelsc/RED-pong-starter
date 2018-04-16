@@ -1,8 +1,6 @@
 # Pong Game
 
-A basic pong game using SVGs and ES6.
-
-[https://rafaelsc.github.io/RED-PONG-STARTER/](https://rafaelsc.github.io/RED-PONG-STARTER/)
+A basic pong game using SVGs and ES6. [https://rafaelsc.github.io/RED-pong-starter/](https://rafaelsc.github.io/RED-pong-starter/)
 
 ## Keys
 
