@@ -1,8 +1,8 @@
 export default class Score {
-    constructor(x, y, size) {
-      this.x = x;
-      this.y = y;
-      this.size = size;
+    constructor(scoreSvg) {
+        this.scoreSvg = scoreSvg;
+        this.score = 0;
+        this.reset();
     }
 
     reset() {
@@ -11,11 +11,18 @@ export default class Score {
         this.score = 0;
     }
 
+    scores(){
+        this.isDirty = true;
+
+        this.score++;
+    }
+
     render() {
         if(!this.isDirty){
             return;
         }
 
+        this.scoreSvg.text(this.score.toString());
         this.isDirty = false;
     }
 }

@@ -8,7 +8,13 @@ export const KEYS = {
 }
 
 export const GameSettings = {
+    isGameMute: true,
     maxScroe: 10,
-    intervalToWaitAfterScoreTimeInMs : 250,
-    firstBallRadius: 6
+    intervalToWaitAfterScoreToNewRoundInMs: 250,
+
+    maxOfBallsInGame: 5,
+    firstBallRadius: 6,
+    randomBallMinRadius: 3,
+    randomBallMaxRadius: 16,
+    intervalToNewBallStartInARoundInMs: 500,
 }

@@ -29,7 +29,19 @@ export class Board{
     }
 
     addBall(radius = 0){
-        this.balls.push(Ball.createNewBallElement(this.boardSvg, radius));
+        if(this.balls.length >= this.gameSettings.maxOfBallsInGame){
+            return false;
+        }
+
+        radius = radius || (this.gameSettings.randomBallMinRadius + Math.random() * this.gameSettings.randomBallMaxRadius);
+        const ball = Ball.createNewBallElement(this.boardSvg, radius, this.gameSettings.isGameMute);
+        this.balls.push(ball);
+
+        const isExtraBall = (this.balls.length > 1);
+        if(isExtraBall){
+            setTimeout(()=> ball.startMoving(), this.gameSettings.intervalToNewBallStartInARoundInMs);
+        }
+        return true;
     }
 
     reset() {
@@ -50,7 +62,7 @@ export class Board{
         const paddle2Box = this.paddle2.bbox();
 
         this.balls.map(ball => {
-            let hitSide = ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
+            const hitSide = ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
             if(hitSide !== 0){
                 this.scores(ball, hitSide);
             }
@@ -59,7 +71,7 @@ export class Board{
 
     scores(ball, hitSide){
         ball.reset();
-        setTimeout(()=> ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreTimeInMs);
+        setTimeout(()=> ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreToNewRoundInMs);
         this.score.scores(hitSide === -1 ? 2 : 1);
     }
 

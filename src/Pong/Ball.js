@@ -1,7 +1,9 @@
 
 export class Ball{
-    constructor(ballSvg){
+    constructor(ballSvg, isMute = false){
         this.ballSvg = ballSvg;
+        this.isMute = isMute;
+
         this.cx = this.originalCX = ballSvg.cx();
         this.cy = this.originalCY = ballSvg.cy();
         this.direction = this.vx = this.vy = 0;
@@ -12,11 +14,10 @@ export class Ball{
                             new Audio("public/sounds/pong-03.wav")];
     }
 
-    static createNewBallElement(boardSvg, radiosSize = 0) {
-        radiosSize = radiosSize === 0 ? (3 + Math.random() * 16) : radiosSize;
-        const ballSvg = boardSvg.circle(radiosSize*2)
+    static createNewBallElement(boardSvg, radiusSize = 6, isMute = false) {
+        const ballSvg = boardSvg.circle(radiusSize*2)
                                 .center(boardSvg.width()/2, boardSvg.height()/2);
-        return new Ball(ballSvg);
+        return new Ball(ballSvg, isMute);
     }
 
     removeBall(){
@@ -35,7 +36,14 @@ export class Ball{
         this.direction = this.vx = this.vy = 0;
     }
 
+    get isMoving(){
+        return (this.vx !== 0 || this.vy !== 0)
+    }
+
     startMoving(direction = null) {
+        if(this.isMoving){
+            return;
+        }
         this.isDirty = true;
 
         this.direction = direction || (Math.random() > .5 ? 1 : -1);
@@ -110,8 +118,10 @@ export class Ball{
 
     collisionDetected(){
         const sound = this.pingSounds.shift();
-        sound.play();
         this.pingSounds.push(sound);
+        if(!this.isMute){
+            sound.play();
+        }
     }
 
     render() {
@@ -120,6 +130,6 @@ export class Ball{
         }
         this.ballSvg.center(this.cx, this.cy);
 
-        this.isDirty = (this.vx !== 0 || this.vy !== 0);
+        this.isDirty = this.isMoving;
     }
 }

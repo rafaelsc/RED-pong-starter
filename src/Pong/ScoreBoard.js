@@ -1,35 +1,29 @@
+import Score from "./Score";
+
 export class ScoreBoard{
     constructor(score1Svg, score2Svg){
-        this.score1Svg = score1Svg;
-        this.score2Svg = score2Svg;
+        this.player1 = new Score(score1Svg);
+        this.player2 = new Score(score2Svg);
+
         this.reset();
     }
 
     reset() {
-        this.isDirty = true;
-        this.player1 = 0;
-        this.player2 = 0;
+        this.player1.reset();
+        this.player2.reset();
     }
 
     scores(playerThatScore){
-        this.isDirty = true;
-
         if(playerThatScore === 1){
-            this.player1++;
+            this.player1.scores();
         }
         if(playerThatScore === 2){
-            this.player2++;
+            this.player2.scores();
         }
     }
 
     render() {
-        if(!this.isDirty){
-            return;
-        }
-
-        this.score1Svg.text(this.player1.toString());
-        this.score2Svg.text(this.player2.toString());
-
-        this.isDirty = false;
+        this.player1.render();
+        this.player2.render();
     }
 }
