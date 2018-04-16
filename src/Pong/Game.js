@@ -13,8 +13,9 @@ export default class Game {
         const p1WinnerSvg = SVG.get("p1Winner");
         const p2WinnerSvg = SVG.get("p2Winner");
 
-        this.gameSettings = gameSettings;
+        this.gamePauseTextSvg = SVG.get("gamePauseText");
 
+        this.gameSettings = gameSettings;
         this.board = new Board(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg, p1WinnerSvg, p2WinnerSvg);
 
         this.reset();
@@ -46,6 +47,7 @@ export default class Game {
     }
 
     reset() {
+        this.gamePauseTextSvg.addClass("hidden");
         this.board.reset()
         this.isStarted = false;
         this.isPaused = true;
@@ -55,6 +57,8 @@ export default class Game {
         if(!this.isStarted){
             this.reset();
             this.board.start();
+        }else{
+            this.gamePauseTextSvg.toggleClass("hidden");
         }
         this.isPaused = !this.isPaused;
         this.isStarted = true;

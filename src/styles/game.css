@@ -89,6 +89,26 @@ main{
     max-width: 512px;
 }
 
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+@keyframes blinkerCrazy {
+    50% {
+        fill-opacity: 0;
+    }
+    25%, 95%{
+        stroke-opacity: 0
+    }
+}
+@keyframes blinkerBorder {
+    50% {
+        stroke-opacity: 0;
+    }
+}
+
 .game-board svg {
     background: #353535;
     color: white;
@@ -103,24 +123,23 @@ main{
     stroke: gray;
 }
 
-.winner-text .hidden{
+svg .hidden{
     opacity: 0;
 }
 
+#gamePauseText{
+    fill: goldenrod;
+    stroke: gray;
+    stroke-width: 2px;
 
-@keyframes blinker {
-    50% {
-        opacity: 0;
-    }
+    font-size: 3.2rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+
+    animation: blinkerBorder 1s linear infinite;
 }
-@keyframes blinker2 {
-    50% {
-        fill-opacity: 0;
-    }
-    25%, 95%{
-        stroke-opacity: 0
-    }
-}
+
+
 
 .ball{
     stroke: white;
@@ -144,7 +163,7 @@ main{
 .ball:nth-of-type(5){
     fill: yellow;
     stroke-width: 3px;
-    animation: blinker2 1s linear infinite;
+    animation: blinkerCrazy 1s linear infinite;
 }
 .ball:nth-of-type(6){
     fill: yellowgreen;
@@ -152,20 +171,21 @@ main{
 .ball:nth-of-type(7){
     fill: teal;
     stroke-width: 3px;
-    animation: blinker2 1s linear infinite;
+    animation: blinkerCrazy 1s linear infinite;
 }
 .ball:nth-of-type(8){
     fill: slateblue;
 }
 .ball:nth-of-type(9){
     fill: seagreen;
-    animation: blinker 0.5s ease-in-out infinite;
+    animation: blinker 3s ease-in-out infinite;
 }
 .ball:nth-of-type(10){
     fill: steelblue;
     stroke-width: 3px;
-    animation: blinker2 2s linear infinite;
+    animation: blinkerCrazy 2s linear infinite;
 }
+
 
 .keymap{
     display: flex;
