@@ -11,7 +11,8 @@ const keyMapCallBack = new KeyPressMapCallBack(new Map([
     [ KEYS.p2Up     , () => game.player2MoveUp()   ],
     [ KEYS.p2Down   , () => game.player2MoveDown() ],
     [ KEYS.gameStart, () => game.startOrPause()    ],
-    [ KEYS.addBall  , () => game.addBall()         ]
+    [ KEYS.addBall  , () => game.addBall()         ],
+    [ KEYS.reset    , () => game.reset()           ]
 ]));
 
 document.body.addEventListener("keydown", function (e) {

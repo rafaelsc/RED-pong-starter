@@ -28,7 +28,7 @@ export class Ball{
         this.ballSvg.remove();
     }
 
-    bbox() {
+    get box() {
         return this.ballSvg.bbox();
     }
 
@@ -54,13 +54,13 @@ export class Ball{
         while(Math.abs(this.vy) < 0.8){
             this.vy = random.real(-5, 5, true);
         }
-        this.vx = this.direction * (random.real(Math.abs(this.vy), this.bbox().height/4));
+        this.vx = this.direction * (random.real(Math.abs(this.vy), this.box.height/4));
     }
 
     updatePos(boardBox, paddle1Box, paddle2Box){
         this.isDirty = true;
 
-        const ballBox = this.bbox();
+        const ballBox = this.box
         const hitSide = this.checkforWallCollision(ballBox, boardBox);
         this.checkforPaddleCollision(ballBox, paddle1Box, paddle2Box)
 

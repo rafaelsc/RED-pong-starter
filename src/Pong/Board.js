@@ -15,8 +15,8 @@ export class Board{
         this.boardBox = this.boardSvg.rbox();
 
         this.score = new ScoreBoard(score1Svg, score2Svg);
-        this.paddle1 = new Paddle(p1PaddleSvg, this.boardBox.height);
-        this.paddle2 = new Paddle(p2PaddleSvg, this.boardBox.height);
+        this.paddle1 = new Paddle(p1PaddleSvg, this.boardBox.height, gameSettings.paddleSpeedCalculatorFunc);
+        this.paddle2 = new Paddle(p2PaddleSvg, this.boardBox.height, gameSettings.paddleSpeedCalculatorFunc);
 
         this.balls = [];
         this.reset();
@@ -61,8 +61,8 @@ export class Board{
     }
 
     update() {
-        const paddle1Box = this.paddle1.bbox();
-        const paddle2Box = this.paddle2.bbox();
+        const paddle1Box = this.paddle1.box;
+        const paddle2Box = this.paddle2.box;
 
         this.balls.map(ball => {
             const hitSide = ball.updatePos(this.boardBox, paddle1Box, paddle2Box);
@@ -76,6 +76,9 @@ export class Board{
         ball.reset();
         setTimeout(()=> ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreToNewRoundInMs);
         this.score.scores(hitSide === -1 ? 2 : 1);
+
+        this.paddle1.updateSize(this.score.player1.score, this.score.player2.score);
+        this.paddle2.updateSize(this.score.player2.score, this.score.player1.score);
     }
 
     render() {

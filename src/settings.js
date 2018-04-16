@@ -5,6 +5,7 @@ export const KEYS = {
     p2Down: "ArrowDown",
     gameStart: "Space",
     addBall: "KeyB",
+    reset: "KeyR"
 }
 
 export const GameSettings = {
@@ -17,4 +18,8 @@ export const GameSettings = {
     randomBallMinRadius: 3,
     randomBallMaxRadius: 16,
     intervalToNewBallStartInARoundInMs: 500,
+
+    paddleSpeedCalculatorFunc: (size) => {
+        return Math.max(2, Math.min( (6/size*100) , 40))
+    }
 }
