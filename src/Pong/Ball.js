@@ -19,7 +19,8 @@ export class Ball{
 
     static createNewBallElement(boardSvg, radiusSize = 6, isMute = false) {
         const ballSvg = boardSvg.circle(radiusSize*2)
-                                .center(boardSvg.width()/2, boardSvg.height()/2);
+                                .center(boardSvg.width()/2, boardSvg.height()/2)
+                                .addClass("ball");
         return new Ball(ballSvg, isMute);
     }
 

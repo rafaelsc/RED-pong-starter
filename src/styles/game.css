@@ -97,6 +97,67 @@ h1 {
     font-size: 2rem;
 }
 
+
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+@keyframes blinker2 {
+    50% {
+        fill-opacity: 0;
+    }
+    25%, 95%{
+        stroke-opacity: 0
+    }
+}
+
+.ball{
+    stroke: white;
+    stroke-width: 0px;
+    fill-opacity: 1;
+}
+.ball:nth-of-type(1){
+    fill: white;
+}
+.ball:nth-of-type(2){
+    fill: tan;
+}
+.ball:nth-of-type(3){
+    fill: salmon;
+    animation: blinker 1s linear infinite;
+}
+.ball:nth-of-type(4){
+    fill: thistle;
+    animation: blinker 1s ease-in-out infinite;
+}
+.ball:nth-of-type(5){
+    fill: yellow;
+    stroke-width: 3px;
+    animation: blinker2 1s linear infinite;
+}
+.ball:nth-of-type(6){
+    fill: yellowgreen;
+}
+.ball:nth-of-type(7){
+    fill: teal;
+    stroke-width: 3px;
+    animation: blinker2 1s linear infinite;
+}
+.ball:nth-of-type(8){
+    fill: slateblue;
+}
+.ball:nth-of-type(9){
+    fill: seagreen;
+    animation: blinker 0.5s ease-in-out infinite;
+}
+.ball:nth-of-type(10){
+    fill: steelblue;
+    stroke-width: 3px;
+    animation: blinker2 2s linear infinite;
+}
+
 .keymap{
     display: flex;
     flex-flow: row wrap;
