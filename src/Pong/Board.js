@@ -91,13 +91,16 @@ export class Board{
 
         const gameEnd = (this.score.maxScore === this.gameSettings.maxScore);
         if(gameEnd){
-            this.removeBalls();
-            if(this.scoreBoard.winnerPalyer === 1){
-                this.p1WinnerSvg.removeClass("hidden");
-            }else{
-                this.p2WinnerSvg.removeClass("hidden");
-            }
-            console.log("Game END");
+            this.endOfGame();
+        }
+    }
+
+    endOfGame(){
+        this.removeBalls();
+        if(this.scoreBoard.winningPalyer === 1){
+            this.p1WinnerSvg.removeClass("hidden");
+        }else{
+            this.p2WinnerSvg.removeClass("hidden");
         }
     }
 

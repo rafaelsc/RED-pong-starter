@@ -20,6 +20,6 @@ export const GameSettings = {
     intervalToNewBallStartInARoundInMs: 500,
 
     paddleSpeedCalculatorFunc: (size) => {
-        return Math.max(2, Math.min( (6/size*100) , 40))
+        return Math.max(2, Math.min( (8/size*100) , 50))
     }
 }

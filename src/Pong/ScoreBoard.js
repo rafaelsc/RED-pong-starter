@@ -25,7 +25,7 @@ export class ScoreBoard{
         return Math.max(this.player1.score, this.player2.score);
     }
 
-    get winnerPalyer() {
+    get winningPalyer() {
         return this.player1Score === this.player2Score ? 0 : this.player1Score > this.player2Score ? 1 : 2;
     }
 
