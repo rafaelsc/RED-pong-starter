@@ -79,6 +79,12 @@ export class Board{
 
         this.paddle1.updateSize(this.score.player1.score, this.score.player2.score);
         this.paddle2.updateSize(this.score.player2.score, this.score.player1.score);
+
+        const gameEnd = (this.score.maxScore === this.gameSettings.maxScore);
+        if(gameEnd){
+            console.log("Game END");
+            //TODO;
+        }
     }
 
     render() {

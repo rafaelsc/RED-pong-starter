@@ -22,6 +22,10 @@ export class ScoreBoard{
         }
     }
 
+    get maxScore(){
+        return Math.max(this.player1.score, this.player2.score);
+    }
+
     render() {
         this.player1.render();
         this.player2.render();

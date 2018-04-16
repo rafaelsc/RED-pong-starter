@@ -114,7 +114,7 @@ export class Ball{
             this.vx *= -1;
             this.direction *= -1;
             this.collisionDetected();
-            console.log("HitPaddle! Front Side");
+            // console.log("HitPaddle! Front Side");
             return;
         }
 

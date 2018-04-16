@@ -1,20 +1,24 @@
 export default class Score {
     constructor(scoreSvg) {
         this.scoreSvg = scoreSvg;
-        this.score = 0;
+        this.scoreInternal = 0;
         this.reset();
     }
 
     reset() {
         this.isDirty = true;
 
-        this.score = 0;
+        this.scoreInternal = 0;
     }
 
     scores(){
         this.isDirty = true;
 
-        this.score++;
+        this.scoreInternal++;
+    }
+
+    get score () {
+        return this.scoreInternal;
     }
 
     render() {
