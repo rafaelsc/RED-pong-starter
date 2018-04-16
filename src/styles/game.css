@@ -97,6 +97,16 @@ main{
     font-size: 2rem;
 }
 
+.winner-text {
+    font-size: 3rem;
+    fill: yellow;
+    stroke: gray;
+}
+
+.winner-text .hidden{
+    opacity: 0;
+}
+
 
 @keyframes blinker {
     50% {

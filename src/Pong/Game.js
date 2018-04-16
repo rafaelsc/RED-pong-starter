@@ -10,10 +10,12 @@ export default class Game {
         const ballSvg = SVG.get("ball");
         const score1Svg = SVG.get("p1Score");
         const score2Svg = SVG.get("p2Score");
+        const p1WinnerSvg = SVG.get("p1Winner");
+        const p2WinnerSvg = SVG.get("p2Winner");
 
         this.gameSettings = gameSettings;
 
-        this.board = new Board(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg);
+        this.board = new Board(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg, p1WinnerSvg, p2WinnerSvg);
 
         this.reset();
 	}

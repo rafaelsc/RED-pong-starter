@@ -10,7 +10,7 @@ export const KEYS = {
 
 export const GameSettings = {
     isGameMute: true,
-    maxScore: 20,
+    maxScore: 10,
     intervalToWaitAfterScoreToNewRoundInMs: 250,
 
     maxOfBallsInGame: 5,

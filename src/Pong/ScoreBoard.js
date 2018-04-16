@@ -13,6 +13,22 @@ export class ScoreBoard{
         this.player2.reset();
     }
 
+    get player1Score(){
+        return this.player1.score;
+    }
+
+    get player2Score(){
+        return this.player2.score;
+    }
+
+    get maxScore(){
+        return Math.max(this.player1.score, this.player2.score);
+    }
+
+    get winnerPalyer() {
+        return this.player1Score === this.player2Score ? 0 : this.player1Score > this.player2Score ? 1 : 2;
+    }
+
     scores(playerThatScore){
         if(playerThatScore === 1){
             this.player1.scores();
@@ -22,9 +38,7 @@ export class ScoreBoard{
         }
     }
 
-    get maxScore(){
-        return Math.max(this.player1.score, this.player2.score);
-    }
+
 
     render() {
         this.player1.render();

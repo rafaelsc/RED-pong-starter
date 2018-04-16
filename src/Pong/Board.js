@@ -8,11 +8,14 @@ import { Ball } from "./Ball.js";
 const random = new Random();
 
 export class Board{
-    constructor(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg){
+    constructor(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg, p1WinnerSvg, p2WinnerSvg){
         this.gameSettings = gameSettings;
 
         this.boardSvg = boardSvg;
         this.boardBox = this.boardSvg.rbox();
+
+        this.p1WinnerSvg = p1WinnerSvg;
+        this.p2WinnerSvg = p2WinnerSvg;
 
         this.score = new ScoreBoard(score1Svg, score2Svg);
         this.paddle1 = new Paddle(p1PaddleSvg, this.boardBox.height, gameSettings.paddleSpeedCalculatorFunc);
@@ -48,12 +51,18 @@ export class Board{
     }
 
     reset() {
+        this.p1WinnerSvg.addClass("hidden");
+        this.p2WinnerSvg.addClass("hidden");
         this.score.reset()
         this.paddle1.reset();
         this.paddle2.reset();
+        this.removeBalls();
+        this.addBall(this.gameSettings.firstBallRadius);
+    }
+
+    removeBalls() {
         this.balls.map(b => b.removeBall())
         this.balls = [];
-        this.addBall(this.gameSettings.firstBallRadius);
     }
 
     start() {
@@ -82,8 +91,13 @@ export class Board{
 
         const gameEnd = (this.score.maxScore === this.gameSettings.maxScore);
         if(gameEnd){
+            this.removeBalls();
+            if(this.scoreBoard.winnerPalyer === 1){
+                this.p1WinnerSvg.removeClass("hidden");
+            }else{
+                this.p2WinnerSvg.removeClass("hidden");
+            }
             console.log("Game END");
-            //TODO;
         }
     }
 
