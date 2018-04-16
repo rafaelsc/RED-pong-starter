@@ -22,28 +22,24 @@ export default class Game {
         if(this.isPaused){
             return;
         }
-        console.log("player1MoveUp");
         return this.board.player1.moveUp();
     }
     player1MoveDown() {
         if(this.isPaused){
             return;
         }
-        console.log("player2MoveDown");
         return this.board.player1.moveDown();
     }
     player2MoveUp() {
         if(this.isPaused){
             return;
         }
-        console.log("player2MoveUp");
         return this.board.player2.moveUp();
     }
     player2MoveDown() {
         if(this.isPaused){
             return;
         }
-        console.log("player2MoveDown");
         return this.board.player2.moveDown();
     }
 

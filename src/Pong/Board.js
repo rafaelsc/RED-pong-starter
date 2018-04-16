@@ -1,7 +1,11 @@
 import { setTimeout } from "timers";
+import Random from "random-js";
+
 import { Paddle } from "./Paddle.js";
 import { ScoreBoard } from "./ScoreBoard.js";
 import { Ball } from "./Ball.js";
+
+const random = new Random();
 
 export class Board{
     constructor(gameSettings, boardSvg, p1PaddleSvg, p2PaddleSvg, ballSvg, score1Svg, score2Svg){
@@ -28,12 +32,11 @@ export class Board{
         return this.score;
     }
 
-    addBall(radius = 0){
+    addBall(radius = random.integer(this.gameSettings.randomBallMinRadius, this.gameSettings.randomBallMaxRadius)){
         if(this.balls.length >= this.gameSettings.maxOfBallsInGame){
             return false;
         }
 
-        radius = radius || (this.gameSettings.randomBallMinRadius + Math.random() * this.gameSettings.randomBallMaxRadius);
         const ball = Ball.createNewBallElement(this.boardSvg, radius, this.gameSettings.isGameMute);
         this.balls.push(ball);
 

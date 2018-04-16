@@ -1,3 +1,6 @@
+import Random from "random-js";
+
+const random = new Random();
 
 export class Ball{
     constructor(ballSvg, isMute = false){
@@ -46,11 +49,15 @@ export class Ball{
         }
         this.isDirty = true;
 
-        this.direction = direction || (Math.random() > .5 ? 1 : -1);
-        while(this.vy === 0){
-            this.vy = Math.floor(Math.random() * 10 - 5);
+        this.direction = direction || (random.bool() ? 1 : -1);
+        while(Math.abs(this.vy) < 1){
+            //this.vy = (Math.random() * 10 - 5);
+            this.vy = random.real(-5, 5, true);
         }
-        this.vx = this.direction * (6 - Math.abs(this.vy));
+        // this.vx = this.direction * (6 - Math.abs(this.vy));
+        this.vx = this.direction * (random.real(Math.abs(this.vy), this.bbox().height/2));
+
+        console.log(this.vy, this.vx, this.direction, this.bbox().height);
     }
 
     updatePos(boardBox, paddle1Box, paddle2Box){
