@@ -55,9 +55,9 @@ table {
   font-family: 'Silkscreen Web';
   src: url('../../public/fonts/slkscr-webfont.eot');
   src: url('../../public/fonts/slkscr-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../../public/fonts/slkscr-webfont.woff') format('woff'),
-    url('../../public/fonts/slkscr-webfont.ttf') format('truetype'),
-    url('../../public/fonts/slkscr-webfont.svg#silkscreennormal') format('svg');
+       url('../../public/fonts/slkscr-webfont.woff') format('woff'),
+       url('../../public/fonts/slkscr-webfont.ttf') format('truetype'),
+       url('../../public/fonts/slkscr-webfont.svg#silkscreennormal') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -85,10 +85,33 @@ h1 {
   text-align: center;
 }
 
+.game-wrapper{
+    max-width: 512px;
+}
+
 .game-board svg {
     background: #353535;
     color: white;
     stroke: white;
     fill: white;
     font-size: 2rem;
+}
+
+.keymap{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content:space-around;
+}
+.keymap > *{
+    margin:  0.6rem;
+}
+.player1-keymap{
+    text-align: left;
+}
+.main-keymap {
+    text-align: center;
+    order: 3;
+}
+.player2-keymap{
+    text-align: right;
 }
