@@ -33,6 +33,12 @@ export default class Game {
         }
         return this.board.player1.moveDown();
     }
+    player1FireBall() {
+        if(this.isPaused){
+            return;
+        }
+        return this.board.player1FireBall();
+    }
     player2MoveUp() {
         if(this.isPaused){
             return;
@@ -44,6 +50,12 @@ export default class Game {
             return;
         }
         return this.board.player2.moveDown();
+    }
+    player2FireBall() {
+        if(this.isPaused){
+            return;
+        }
+        return this.board.player2FireBall();
     }
 
     reset() {

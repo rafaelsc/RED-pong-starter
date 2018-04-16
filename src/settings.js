@@ -1,8 +1,10 @@
 export const KEYS = {
     p1Up: "KeyA",
     p1Down: "KeyZ",
+    p1Fire: "KeyS",
     p2Up: "ArrowUp",
     p2Down: "ArrowDown",
+    p2Fire: "ArrowLeft",
     gameStart: "Space",
     addBall: "KeyB",
     reset: "KeyR"

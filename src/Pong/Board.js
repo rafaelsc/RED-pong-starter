@@ -35,12 +35,26 @@ export class Board{
         return this.score;
     }
 
+    player1FireBall() {
+        this.fireBall(1);
+    }
+    player2FireBall() {
+        this.fireBall(-1);
+    }
+    fireBall(direction){
+        const playerFired = (direction < 0 ? this.player2 : this.player1);
+        const ball = Ball.createNewBallElement(this.boardSvg, this.gameSettings.firstBallRadius, false, this.gameSettings.isGameMute, playerFired.box.cx, playerFired.box.cy);
+        this.balls.push(ball);
+        setTimeout(()=> ball.startMovingTo(direction), 1);
+        return true;
+    }
+
     addBall(radius = random.integer(this.gameSettings.randomBallMinRadius, this.gameSettings.randomBallMaxRadius)){
         if(this.balls.length >= this.gameSettings.maxOfBallsInGame){
             return false;
         }
 
-        const ball = Ball.createNewBallElement(this.boardSvg, radius, this.gameSettings.isGameMute);
+        const ball = Ball.createNewBallElement(this.boardSvg, radius, true, this.gameSettings.isGameMute);
         this.balls.push(ball);
 
         const isExtraBall = (this.balls.length > 1);
@@ -82,8 +96,14 @@ export class Board{
     }
 
     scores(ball, hitSide){
-        ball.reset();
-        setTimeout(()=> ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreToNewRoundInMs);
+        if(ball.autoRespawn){
+            ball.reset();
+            setTimeout(()=> ball.startMoving(hitSide*-1), this.gameSettings.intervalToWaitAfterScoreToNewRoundInMs);
+        }else{
+            ball.removeBall();
+            this.balls.splice(this.balls.indexOf(ball), 1); //Remove from Board
+        }
+
         this.score.scores(hitSide === -1 ? 2 : 1);
 
         this.paddle1.updateSize(this.score.player1.score, this.score.player2.score);

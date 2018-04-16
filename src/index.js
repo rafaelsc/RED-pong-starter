@@ -10,8 +10,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const keyMapCallBack = new KeyPressMapCallBack(new Map([
         [ KEYS.p1Up     , () => game.player1MoveUp()   ],
         [ KEYS.p1Down   , () => game.player1MoveDown() ],
+        [ KEYS.p1Fire   , () => game.player1FireBall() ],
         [ KEYS.p2Up     , () => game.player2MoveUp()   ],
         [ KEYS.p2Down   , () => game.player2MoveDown() ],
+        [ KEYS.p2Fire   , () => game.player2FireBall() ],
         [ KEYS.gameStart, () => game.startOrPause()    ],
         [ KEYS.addBall  , () => game.addBall()         ],
         [ KEYS.reset    , () => game.reset()           ]
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.body.addEventListener("keydown", function (e) {
         const isKeyIsMapped = keyMapCallBack.press(e.code);
         if(isKeyIsMapped){
-            event.preventDefault();
+            e.preventDefault();
         }
     });
     document.body.addEventListener("keyup", function (e) {

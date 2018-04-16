@@ -3,8 +3,9 @@ import Random from "random-js";
 const random = new Random();
 
 export class Ball{
-    constructor(ballSvg, isMute = false){
+    constructor(ballSvg, autoRespawn = true, isMute = false){
         this.ballSvg = ballSvg;
+        this.autoRespawnInternal = autoRespawn;
         this.isMute = isMute;
 
         this.cx = this.originalCX = ballSvg.cx();
@@ -17,19 +18,26 @@ export class Ball{
                             new Audio("public/sounds/pong-03.wav")];
     }
 
-    static createNewBallElement(boardSvg, radiusSize = 6, isMute = false) {
+    static createNewBallElement(boardSvg, radiusSize = 6, autoRespawn = true, isMute = false, cx = null, cy = null) {
         const ballSvg = boardSvg.circle(radiusSize*2)
-                                .center(boardSvg.width()/2, boardSvg.height()/2)
+                                .center(cx || boardSvg.width()/2, cy || boardSvg.height()/2)
                                 .addClass("ball");
-        return new Ball(ballSvg, isMute);
+        return new Ball(ballSvg, autoRespawn, isMute);
     }
 
     removeBall(){
         this.ballSvg.remove();
     }
 
+    get autoRespawn() {
+        return this.autoRespawnInternal;
+    }
     get box() {
         return this.ballSvg.bbox();
+    }
+
+    get isMoving(){
+        return (this.vx !== 0 || this.vy !== 0)
     }
 
     reset() {
@@ -38,10 +46,6 @@ export class Ball{
         this.cx = this.originalCX;
         this.cy = this.originalCY;
         this.direction = this.vx = this.vy = 0;
-    }
-
-    get isMoving(){
-        return (this.vx !== 0 || this.vy !== 0)
     }
 
     startMoving(direction = null) {
@@ -55,6 +59,16 @@ export class Ball{
             this.vy = random.real(-5, 5, true);
         }
         this.vx = this.direction * (random.real(Math.abs(this.vy), this.box.height/4));
+    }
+    startMovingTo(direction = null) {
+        if(this.isMoving){
+            return;
+        }
+        this.isDirty = true;
+
+        this.direction = direction;
+        this.vy = 0;
+        this.vx = (this.direction * 5);
     }
 
     updatePos(boardBox, paddle1Box, paddle2Box){
