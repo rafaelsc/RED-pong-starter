@@ -3,7 +3,7 @@ import KeyPressMapCallBack from "./util/KeyPressMapCallBack.js"
 import {KEYS, GameSettings} from "./settings.js";
 import Game from "./Pong/Game";
 
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function() {
 
     const game = new Game(GameSettings);
 
