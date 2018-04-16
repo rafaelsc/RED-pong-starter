@@ -16,7 +16,7 @@ A basic pong game using SVGs and ES6.
 
 * ▲ : up
 * ▼: down
-* &#x25C0;: fire
+* ◄: fire
 
 **Game:**
 
