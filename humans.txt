@@ -1,0 +1,17 @@
+# TEAM
+
+    Rafaelsc - Web Dev
+
+# THANKS
+
+    Red Academy
+    NTY
+
+# TECHNOLOGY COLOPHON
+
+    HTML5
+    CSS3, Reset.css
+    TypeScript, jQuery, JRender, Modernizr, Selectric
+    SASS
+    GULP
+

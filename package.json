@@ -1,9 +1,9 @@
 {
   "name": "pong-svg",
-  "version": "0.1.0",
-  "description": "An SVG Pong game.",
-  "license": "ISC",
-  "author": "Mandi Wise <mandi@redacademy.com>",
+  "version": "1.0.0",
+  "description": "An SVG Pong game, by Rafaelsc.",
+  "license": "CC",
+  "author": "rafaelsc",
   "main": "build/bundle.js",
   "scripts": {
     "start": "webpack-dev-server",
