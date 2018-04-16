@@ -11,7 +11,7 @@ export const KEYS = {
 }
 
 export const GameSettings = {
-    isGameMute: true,
+    isGameMute: false,
     maxScore: 10,
     intervalToWaitAfterScoreToNewRoundInMs: 250,
 
