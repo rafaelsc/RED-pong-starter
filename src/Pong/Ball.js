@@ -50,14 +50,10 @@ export class Ball{
         this.isDirty = true;
 
         this.direction = direction || (random.bool() ? 1 : -1);
-        while(Math.abs(this.vy) < 1){
-            //this.vy = (Math.random() * 10 - 5);
+        while(Math.abs(this.vy) < 0.8){
             this.vy = random.real(-5, 5, true);
         }
-        // this.vx = this.direction * (6 - Math.abs(this.vy));
-        this.vx = this.direction * (random.real(Math.abs(this.vy), this.bbox().height/2));
-
-        console.log(this.vy, this.vx, this.direction, this.bbox().height);
+        this.vx = this.direction * (random.real(Math.abs(this.vy), this.bbox().height/4));
     }
 
     updatePos(boardBox, paddle1Box, paddle2Box){
