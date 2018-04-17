@@ -15,6 +15,13 @@ export class Paddle{
         return this.paddleSvg.bbox();
     }
 
+    set currentShotBall(ball){
+        this.currentShotBallInternal = ball;
+    }
+    get currentShotBall(){
+        return this.currentShotBallInternal;
+    }
+
     calculateSpeed() {
         return this.paddleSpeedFunction(this.box.height);
     }
@@ -36,6 +43,8 @@ export class Paddle{
 
         this.updateSize();
         this.y = this.originalY;
+
+        this.currentShotBallInternal = null;
     }
 
     updateSize(myScore=0, opponentScore=0){

@@ -43,7 +43,11 @@ export class Board{
     }
     fireBall(direction){
         const playerFired = (direction < 0 ? this.player2 : this.player1);
+        if(playerFired.currentShotBall){
+            return;
+        }
         const ball = Ball.createNewBallElement(this.boardSvg, this.gameSettings.firstBallRadius, false, this.gameSettings.isGameMute, playerFired.box.cx, playerFired.box.cy);
+        playerFired.currentShotBall = ball;
         this.balls.push(ball);
         setTimeout(()=> ball.startMovingTo(direction), 1);
         return true;
@@ -102,6 +106,12 @@ export class Board{
         }else{
             ball.removeBall();
             this.balls.splice(this.balls.indexOf(ball), 1); //Remove from Board
+            if(this.player1.currentShotBall === ball){
+                this.player1.currentShotBall = null;
+            }
+            if(this.player2.currentShotBall === ball){
+                this.player2.currentShotBall = null;
+            }
         }
 
         this.score.scores(hitSide === -1 ? 2 : 1);
