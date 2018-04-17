@@ -1,8 +1,8 @@
 import "./styles/game.css";
-import KeyPressMapCallBack from "./util/KeyPressMapCallBack.js"
+import KeyPressMapCallBack from "./util/KeyPressMapCallBack.js";
 import {KEYS, GameSettings} from "./settings.js";
 import Game from "./Pong/Game";
-import "js-polyfills/keyboard.js"
+import "js-polyfills/keyboard.js";
 
 document.addEventListener("DOMContentLoaded", function() {
 
