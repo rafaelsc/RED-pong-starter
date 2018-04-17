@@ -44,6 +44,7 @@ A basic pong game using SVGs and ES6. [https://rafaelsc.github.io/RED-pong-start
   * Polyfill with core-js
 * SVG-js
 * Random-js
+* js-polyfills/keyboard - _For Better compatibility wirh Edge_
 
 ### Software
 

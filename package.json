@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "core-js": "^2.5.5",
+    "js-polyfills": "^0.1.42",
     "random-js": "^1.0.8",
     "svg.js": "^2.6.4"
   }
