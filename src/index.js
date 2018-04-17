@@ -3,6 +3,7 @@ import KeyPressMapCallBack from "./util/KeyPressMapCallBack.js";
 import {KEYS, GameSettings} from "./settings.js";
 import Game from "./Pong/Game";
 import "js-polyfills/keyboard.js";
+import MainLoop from "mainloop.js";
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -30,11 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         keyMapCallBack.release(e.code);
     });
 
-
-    (function gameLoop() {
-        game.gameloop();
-        requestAnimationFrame(gameLoop);
-    })();
-
-
+    MainLoop.setUpdate( (delta) => game.update(delta) )
+            .setDraw(        () => game.render() )
+            .start();
 });

@@ -83,10 +83,13 @@ export default class Game {
         return this.board.addBall();
     }
 
-	gameloop() {
+    update(delta){
         if(!this.isPaused && this.isStarted){
-            this.board.update();
+            this.board.update(delta);
         }
+    }
+
+	render() {
         this.board.render();
 	}
 }

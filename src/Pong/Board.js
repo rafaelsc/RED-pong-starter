@@ -87,7 +87,7 @@ export class Board{
         this.balls.map(b => b.startMoving());
     }
 
-    update() {
+    update(delta) {
         const paddle1Box = this.paddle1.box;
         const paddle2Box = this.paddle2.box;
 
